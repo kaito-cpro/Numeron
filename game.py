@@ -1,4 +1,5 @@
 from Field import field
+from virtualPlayer import VirtualPlayer
 
 class Game:
     ''' numeron の実装クラス '''

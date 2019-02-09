@@ -1,3 +1,5 @@
+from playerFaactory import PlayerFactory
+
 class VirtualPlayer:
     ''' Class Game と Class Player の仲介クラス '''
 
