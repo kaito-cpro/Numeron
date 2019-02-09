@@ -4,22 +4,28 @@ from virtualPlayer import VirtualPlayer
 class Game:
     ''' numeron の実装クラス '''
 
-    def __init__(self):
+    def __init__(self, virtual_player):
+        self.player = virtual_player
         self.field = Field()
-        self.player = VirtualPlayer()
         self.winner = None
 
     def play(self):
         ''' 1回ゲームを行う '''
+        self.set_former_player()
         self.set_field()
+
         while True:
             self.guard()
             self.attack()
             self.call()
             if self.ended():
                 self.set_winner()
+                self.tell_result()
                 break
             self.switch()
+
+    def set_former_player(self):
+        self.player.set_former_player()
 
     def set_field(self):
         self.field.set_field(self.player)
@@ -45,6 +51,10 @@ class Game:
 
     def get_winner(self):
         return self.winner
+
+    def tell_result(self):
+        ''' 各playerにゲームの結果を伝える '''
+        self.player.end_process(self.winner)
 
     def switch(self):
         ''' 手番の交代 '''

@@ -1,4 +1,3 @@
-from game import Game
 from virtualPlayer import VirtualPlayer
 
 class Field:

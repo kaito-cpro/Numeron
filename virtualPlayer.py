@@ -1,14 +1,14 @@
+from common import *
 from playerFactory import PlayerFactory
 
 class VirtualPlayer:
     ''' Class Game と Class Player の仲介クラス '''
 
     def __init__(self):
-        self.player1 = PlayerFactory().create_player(1)
-        self.player2 = PlayerFactory().create_player(2)
+        self.player1 = PlayerFactory.create_player(1)
+        self.player2 = PlayerFactory.create_player(2)
 
         self.player = None
-        self.set_former_player()
 
         self.turn = {self.player1: self.player2,    \
                      self.player2: self.player1}
@@ -26,8 +26,13 @@ class VirtualPlayer:
 
     def set_card(self):
         ''' 数字をセットする '''
-        return self.player.set_card()
+        return self.player.receive('set_card')
 
     def set_items(self):
         ''' アイテムをセットする '''
-        return self.player.set_items()
+        return self.player.receive('set_items')
+
+    def end_process(self, winner):
+        for i in range(2):
+            self.player.receive('end_process', winner)
+            self.switch()
