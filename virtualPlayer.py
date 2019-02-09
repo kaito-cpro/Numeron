@@ -10,8 +10,9 @@ class VirtualPlayer:
 
         self.player = None
 
-        self.turn = {self.player1: self.player2,    \
-                     self.player2: self.player1}
+        self.turn = {
+            self.player1: self.player2,
+            self.player2: self.player1}
 
     def set_former_player(self):
         ''' ランダムに先攻を決める '''
