@@ -37,3 +37,6 @@ class VirtualPlayer:
         for i in range(2):
             self.player.receive('end_process', winner)
             self.switch()
+
+    def tell_eat_bite(self, eat_bite):
+        self.player.get_eat_bite(eat_bite)

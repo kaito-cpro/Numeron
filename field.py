@@ -5,8 +5,8 @@ class Field:
     ''' カードとアイテムの実装クラス '''
 
     def __init__(self):
-        self.card = None
-        self.items = None
+        self.card = {1: [], 2: []}
+        self.items = {1: [], 2: []}
 
     def set_field(self, player):
         for i in range(2):
@@ -26,3 +26,9 @@ class Field:
         items = player.set_items()
         # assert
         self.items = items
+
+    def get_card(self, player_num):
+        return self.card[player_num]
+
+    def get_items(self, player_num):
+        return self.items[player_num]

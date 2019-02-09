@@ -19,11 +19,12 @@ class Game:
             if use_items:
                 self.guard()
                 self.attack()
-            self.call()
+            call_num = self.call()
             if self.ended():
                 self.set_winner()
                 self.tell_result()
                 break
+            self.tell_eat_bite(call_num)
             self.switch()
 
     def set_former_player(self):
@@ -57,6 +58,17 @@ class Game:
     def tell_result(self):
         ''' 各playerにゲームの結果を伝える '''
         self.player.end_process(self.winner)
+
+    def tell_eat_bite(self, call_num):
+        ''' callしたplayerに Eat/Bite を伝える '''
+        eat, bite = 0, 0
+        card = self.field.get_card(3-self.player.player_num)
+        for i in range(len(card)):
+            if call_num[i] == card[i]:
+                eat += 1
+            elif call_num[i] in card:
+                bite += 1
+        self.player.tell_eat_bite([eat, bite])
 
     def switch(self):
         ''' 手番の交代 '''

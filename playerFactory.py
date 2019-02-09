@@ -14,4 +14,4 @@ class PlayerFactory:
         selected_player = input((f'player{player_num}: '))
 
         player_class = PlayerFactory.player_dict[selected_player]
-        return player_class()
+        return player_class(player_num)
