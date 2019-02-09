@@ -19,13 +19,13 @@ class Field:
         ''' 数字をセットする '''
         card = player.set_card()
         # assert
-        self.card = card
+        self.card[player.player_num] = card
 
     def set_items(self, player):
         ''' アイテムをセットする '''
         items = player.set_items()
         # assert
-        self.items = items
+        self.items[player.player_num] = items
 
     def get_card(self, player_num):
         return self.card[player_num]
