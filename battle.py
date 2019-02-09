@@ -10,7 +10,7 @@ class Battle:
         self.virtual_player = VirtualPlayer()   # 各ゲームでプレイヤーをリセットせずに使う
         self.player1, self.player2 = self.set_player_names()
         self.times = self.set_times()
-        self.result = {1: 0, 2: 0}  # 各playerの勝数
+        self.result = []  # 勝ったプレイヤーの番号
         self.run()
 
     def set_player_names(self):
@@ -31,20 +31,33 @@ class Battle:
             game = Game(self.virtual_player)
             game.play()
             winner = game.get_winner()
-            self.result[winner] += 1
+            self.result.append(winner)
 
         self.show_result(game)
 
     def show_result(self, game):
         ''' 対戦結果を表示 '''
+        winner = None
+        result_1 = self.result.count(1)    # player1 の勝数
+        result_2 = self.result.count(2)    # player2 の勝数
+
         print('\n** RESULT **')
-        print(f'{self.player1}: {self.result[1]}\n{self.player2}: {self.result[2]}')
-        if self.result[1] > self.result[2]:
+        print(f'{self.player1}: {result_1}\n{self.player2}: {result_2}')
+        if result_1 > result_2:
+            winner = 1
             print(f'winner {self.player1}')
-        elif self.result[1] < self.result[2]:
+        elif result_1 < result_2:
+            winner = 2
             print(f'winner {self.player2}')
         else:
             print('draw')
+
+        use_graph = input('\n対戦結果のグラフを表示しますか(True or False): ')
+        if use_graph:
+            x = [i for i in range(0, self.times+1)]
+            y = [self.result[:i].count(winner)/(i+1) for i in range(0, self.times+1)]
+            plt.plot(x, y)
+            plt.show()
 
 if __name__ == '__main__':
     Battle()

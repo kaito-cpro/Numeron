@@ -1,3 +1,4 @@
+from common import *
 from virtualPlayer import VirtualPlayer
 
 class Field:
@@ -10,7 +11,8 @@ class Field:
     def set_field(self, player):
         for i in range(2):
             self.set_card(player)
-            self.set_items(player)
+            if use_items:
+                self.set_items(player)
             player.switch()
 
     def set_card(self, player):

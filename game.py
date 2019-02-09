@@ -1,3 +1,4 @@
+from common import *
 from field import Field
 from virtualPlayer import VirtualPlayer
 
@@ -15,8 +16,9 @@ class Game:
         self.set_field()
 
         while True:
-            self.guard()
-            self.attack()
+            if use_items:
+                self.guard()
+                self.attack()
             self.call()
             if self.ended():
                 self.set_winner()
