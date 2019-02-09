@@ -1,3 +1,5 @@
+from common import *
+
 class Battle:
     ''' 対戦環境の実装クラス '''
 
