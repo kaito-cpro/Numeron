@@ -7,7 +7,7 @@ class Battle:
 
     def __init__(self):
         print('')
-        self.virtual_player = VirtualPlayer()
+        self.virtual_player = VirtualPlayer()   # 各ゲームでプレイヤーをリセットせずに使う
         self.player1, self.player2 = self.set_player_names()
         self.times = self.set_times()
         self.result = {1: 0, 2: 0}  # 各playerの勝数
