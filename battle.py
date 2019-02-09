@@ -17,7 +17,7 @@ class Battle:
 
     def set_times(self):
         ''' 対戦回数を指定 '''
-        times = input('対戦回数: ')
+        times = int(input('対戦回数: '))
         return times
 
     def run(self):
@@ -35,8 +35,11 @@ class Battle:
         print('** RESULT **')
         print(f'{self.player1}: {self.result[1]}\n{self.player2}: {self.result[2]}')
         if self.result[1] > self.result[2]:
-            print('winner {self.player1}')
+            print(f'winner {self.player1}')
         elif self.result[1] < self.result[2]:
-            print('winner {self.player2}')
+            print(f'winner {self.player2}')
         else:
             print('draw')
+
+if __name__ == '__main__':
+    Battle()
