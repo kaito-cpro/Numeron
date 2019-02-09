@@ -30,7 +30,7 @@ class Battle:
     def show_result(self, game):
         ''' 対戦結果を表示 '''
         print('** RESULT **')
-        print(f'{self.player1}: {self.result[1]}'\n{self.player2}: {self.result[2]})
+        print(f'{self.player1}: {self.result[1]}\n{self.player2}: {self.result[2]}')
         if self.result[1] > self.result[2]:
             print('winner {self.player1}')
         elif self.result[1] < self.result[2]:
