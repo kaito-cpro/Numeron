@@ -23,3 +23,11 @@ class VirtualPlayer:
     def switch(self):
         ''' 手番の交代 '''
         self.player = self.turn[self.player]
+
+    def set_card(self):
+        ''' 数字をセットする '''
+        return self.player.set_card()
+
+    def set_items(self):
+        ''' アイテムをセットする '''
+        return self.player.set_items()

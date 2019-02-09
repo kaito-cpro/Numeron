@@ -11,6 +11,7 @@ class Game:
 
     def play(self):
         ''' 1回ゲームを行う '''
+        self.set_field()
         while True:
             self.guard()
             self.attack()
@@ -19,6 +20,9 @@ class Game:
                 self.set_winner()
                 break
             self.switch()
+
+    def set_field(self):
+        self.field.set_field(self.player)
 
     def guard(self):
         ''' 防御アイテムの使用 '''
