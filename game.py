@@ -1,3 +1,5 @@
+from Field import field
+
 class Game:
     ''' numeron の実装クラス '''
 
