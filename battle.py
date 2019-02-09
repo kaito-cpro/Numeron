@@ -1,4 +1,5 @@
 from common import *
+from game import Game
 
 class Battle:
     ''' 対戦環境の実装クラス '''
