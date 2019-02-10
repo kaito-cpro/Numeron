@@ -5,40 +5,40 @@ class Hoge1(Player):
     ''' デバッグのためのテストプレイヤー '''
 
     def set_card(self):
-        return 345
+        return 34
 
     def set_items(self):
         pass
 
     def call(self):
-        return random.randint(102, 987)
+        return random.randint(12, 98)
 
     def end_process(self, winner):
-        pass
+        print('player1: end_process() is called')  # 開発用
 
     def get_call(self, call_num):
-        pass
+        print('player1: get_call() is called.', f'call_num = {call_num}.')  # 開発用
 
     def get_eat_bite(self, eat, bite):
-        pass
+        print('player1: get_eat_bite() is called.', f'eat = {eat}.', f'bite = {bite}.')  # 開発用
 
 class Hoge2(Player):
     ''' デバッグのためのテストプレイヤー '''
 
     def set_card(self):
-        return 678
+        return 67
 
     def set_items(self):
         pass
 
     def call(self):
-        return random.randint(102, 987)
+        return random.randint(12, 98)
 
     def end_process(self, winner):
-        pass
+        print('player2: end_process() is called')  # 開発用
 
     def get_call(self, call_num):
-        pass
+        print('player2: get_call() is called.', f'call_num = {call_num}.')  # 開発用
 
     def get_eat_bite(self, eat, bite):
-        pass
+        print('player2: get_eat_bite() is called.', f'eat = {eat}.', f'bite = {bite}.')  # 開発用

@@ -21,6 +21,9 @@ class Game:
                 self.guard()
                 self.attack()
             self.call()
+
+            print('call: ', self.log[-1])  # 開発用
+
             self.tell_call()
             self.tell_eat_bite()
             if self.ended():

@@ -33,7 +33,7 @@ class Battle:
             winner = game.get_winner()
             self.result.append(winner)
 
-            print(game.log)  # ログの表示(開発用)
+            # print(game.log)  # ログの表示(開発用)
 
         self.show_result(game)
 
@@ -55,7 +55,7 @@ class Battle:
             print('draw')
 
         use_graph = input('\n対戦結果のグラフを表示しますか(True or False): ')
-        if use_graph:
+        if use_graph == 'True':
             x = [i for i in range(0, self.times+1)]
             y = [self.result[:i].count(winner)/(i+1) for i in range(0, self.times+1)]
             plt.plot(x, y)
