@@ -1,25 +1,44 @@
+from common import *
 from player import Player
 
 class Hoge1(Player):
     ''' デバッグのためのテストプレイヤー '''
 
     def set_card(self):
-        return 345
+        return 34
 
     def set_items(self):
-        return 'items_hoge1'
+        pass
+
+    def call(self):
+        return random.randint(12, 98)
 
     def end_process(self, winner):
+        pass
+
+    def get_call(self, call_num):
+        pass
+
+    def get_eat_bite(self, eat, bite):
         pass
 
 class Hoge2(Player):
     ''' デバッグのためのテストプレイヤー '''
 
     def set_card(self):
-        return 678
+        return 56
 
     def set_items(self):
-        return 'items_hoge2'
+        pass
+
+    def call(self):
+        return random.randint(12, 98)
 
     def end_process(self, winner):
+        pass
+
+    def get_call(self, call_num):
+        pass
+
+    def get_eat_bite(self, eat, bite):
         pass

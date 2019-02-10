@@ -10,9 +10,9 @@ class Field:
 
     def set_field(self, player):
         for i in range(2):
-            self.set_card(player)
+            self.set_card(player.player)
             if use_items:
-                self.set_items(player)
+                self.set_items(player.player)
             player.switch()
 
     def set_card(self, player):

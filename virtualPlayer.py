@@ -27,16 +27,23 @@ class VirtualPlayer:
 
     def set_card(self):
         ''' 数字をセットする '''
-        return self.player.receive('set_card')
+        return self.player.set_card()
 
     def set_items(self):
         ''' アイテムをセットする '''
-        return self.player.receive('set_items')
+        return self.player.set_items()
+
+    def call(self):
+        ''' 数字をコールする '''
+        return self.player.call()
 
     def end_process(self, winner):
         for i in range(2):
-            self.player.receive('end_process', winner)
+            self.player.end_process(winner)
             self.switch()
 
-    def tell_eat_bite(self, eat_bite):
-        self.player.get_eat_bite(eat_bite)
+    def tell_call(self, call_num):
+        self.turn[self.player].get_call(call_num)
+
+    def tell_eat_bite(self, eat, bite):
+        self.player.get_eat_bite(eat, bite)

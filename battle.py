@@ -33,6 +33,8 @@ class Battle:
             winner = game.get_winner()
             self.result.append(winner)
 
+            print(game.log)
+
         self.show_result(game)
 
     def show_result(self, game):
