@@ -49,13 +49,13 @@ class Game:
     def call(self):
         ''' 数字のコール '''
         call_num = self.player.call()
+        call_num = str(call_num).zfill(N)
         self.write_log(self.player, call_num)
 
     def write_log(self, player, call_num):
         ''' ログを記入する(player_num, call_num, eat, bite) '''
         eat, bite = 0, 0
-        card = str(self.field.get_card(3-player.player.player_num))  # 相手のカード
-        call_num = str(call_num)
+        card = self.field.get_card(3-player.player.player_num)  # 相手のカード
 
         for i in range(len(card)):
             if call_num[i] == card[i]:
@@ -63,7 +63,7 @@ class Game:
             elif call_num[i] in card:
                 bite += 1
 
-        self.log.append([player.player.player_num, int(call_num), eat, bite])
+        self.log.append([player.player.player_num, call_num, eat, bite])
 
     def tell_call(self):
         ''' callされたplayerに call を伝える '''

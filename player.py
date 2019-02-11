@@ -5,7 +5,8 @@ class Player:
         self.player_num = player_num
 
     def set_card(self):
-        ''' 数字をセットする '''
+        ''' 数字をセットする
+            返り値の型は int, str のいずれでもよい '''
         pass
 
     def set_items(self):

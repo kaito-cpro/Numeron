@@ -5,13 +5,13 @@ class Hoge1(Player):
     ''' デバッグのためのテストプレイヤー '''
 
     def set_card(self):
-        return 34
+        return '07'
 
     def set_items(self):
         pass
 
     def call(self):
-        return random.randint(12, 98)
+        return random.randint(0, 99)
 
     def end_process(self, winner):
         print('player1: end_process() is called')  # 開発用
@@ -32,7 +32,7 @@ class Hoge2(Player):
         pass
 
     def call(self):
-        return random.randint(12, 98)
+        return random.randint(0, 99)
 
     def end_process(self, winner):
         print('player2: end_process() is called')  # 開発用
