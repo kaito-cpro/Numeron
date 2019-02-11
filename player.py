@@ -14,7 +14,8 @@ class Player:
         pass
 
     def call(self):
-        ''' 数字をコールする '''
+        ''' 数字をコールする
+            返り値の型は int, str のいずれでもよい '''
         pass
 
     def end_process(self, winner):
@@ -22,7 +23,8 @@ class Player:
         pass
 
     def get_call(self, call_num):
-        ''' 相手の call を環境から受け取る '''
+        ''' 相手の call を環境から受け取る
+            call_num の型は str '''
         pass
 
     def get_eat_bite(self, eat, bite):

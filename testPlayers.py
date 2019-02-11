@@ -1,8 +1,8 @@
 from common import *
 from player import Player
 
-class Hoge1(Player):
-    ''' デバッグのためのテストプレイヤー '''
+class TestPlayer1(Player):
+    ''' テストプレイヤー(strでコールする) '''
 
     def set_card(self):
         return '07'
@@ -11,7 +11,7 @@ class Hoge1(Player):
         pass
 
     def call(self):
-        return random.randint(0, 99)
+        return str(random.randint(0, 99))
 
     def end_process(self, winner):
         print('player1: end_process() is called')  # 開発用
@@ -22,8 +22,8 @@ class Hoge1(Player):
     def get_eat_bite(self, eat, bite):
         print('player1: get_eat_bite() is called.', f'eat = {eat}.', f'bite = {bite}.')  # 開発用
 
-class Hoge2(Player):
-    ''' デバッグのためのテストプレイヤー '''
+class TestPlayer2(Player):
+    ''' テストプレイヤー(intでコールする) '''
 
     def set_card(self):
         return 67

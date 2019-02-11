@@ -1,12 +1,12 @@
 from player import Player
-from hogePlayers import *
+from testPlayers import *
 
 class PlayerFactory:
     ''' Player の生成クラス '''
 
     player_dict = {
-        'A': Hoge1,
-        'B': Hoge2}
+        'A': TestPlayer1,
+        'B': TestPlayer2}
 
     def create_player(player_num):
         print(f'player{player_num}を選択してください')
