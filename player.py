@@ -1,8 +1,21 @@
+from common import *
+
 class Player:
     ''' Player の実装クラス(抽象インターフェース) '''
 
     def __init__(self, player_num):
         self.player_num = player_num
+
+    def check_card(self, card):
+        ''' card の数字が適切かどうかの判定 '''
+        card = str(card).zfill(N)
+        flg = True
+        if not '0'.zfill(N) <= card <= str(10**N-1).zfill(N):
+            flg = False
+        for i in range(len(card)):
+            if card.count(card[i]) > 1:
+                flg = False
+        return flg
 
     def set_card(self):
         ''' 数字をセットする

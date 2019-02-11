@@ -8,6 +8,7 @@ class Game:
     def __init__(self, virtual_player):
         self.player = virtual_player
         self.field = Field()
+        self.turn = 0    # ターン数
         self.log = []   # ゲーム進行のログ
         self.winner = None
 
@@ -17,12 +18,13 @@ class Game:
         self.set_field()
 
         while True:
+            self.turn += 1
             if use_items:
                 self.guard()
                 self.attack()
             self.call()
 
-            print('call: ', self.log[-1])  # 開発用
+            # print('call: ', self.log[-1])  # 開発用
 
             self.tell_call()
             self.tell_eat_bite()
@@ -58,10 +60,11 @@ class Game:
         card = self.field.get_card(3-player.player.player_num)  # 相手のカード
 
         for i in range(len(card)):
-            if call_num[i] == card[i]:
-                eat += 1
-            elif call_num[i] in card:
-                bite += 1
+            if call_num[i] in card:
+                bite += card.count(call_num[i])
+                if call_num[i] == card[i]:
+                    eat += 1
+                    bite -= 1
 
         self.log.append([player.player.player_num, call_num, eat, bite])
 

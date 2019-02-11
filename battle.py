@@ -30,6 +30,9 @@ class Battle:
         for i in range(self.times):
             game = Game(self.virtual_player)
             game.play()
+
+            print('ended.', f'turn = {game.turn}.', f'winner = {self.player1 if game.winner==1 else self.player2}')  # 開発用            
+
             winner = game.get_winner()
             self.result.append(winner)
 

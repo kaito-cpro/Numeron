@@ -18,17 +18,19 @@ class Field:
     def set_card(self, player):
         ''' 数字をセットする '''
         card = str(player.set_card()).zfill(N)
+        assert self.check_card(card)
+        self.card[player.player_num] = card
 
-        # 数字の整合性をチェック
+    def check_card(self, card):
+        ''' card の数字が適切かどうかの判定 '''
+        card = str(card).zfill(N)
         flg = True
         if not '0'.zfill(N) <= card <= str(10**N-1).zfill(N):
             flg = False
         for i in range(len(card)):
             if card.count(card[i]) > 1:
                 flg = False
-        assert flg
-
-        self.card[player.player_num] = card
+        return flg
 
     def set_items(self, player):
         ''' アイテムをセットする '''
