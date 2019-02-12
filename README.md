@@ -20,4 +20,4 @@ myTestPlayers.py の中はアイテムには非対応なので, common.py で US
 Class Player の set_items() メソッドは, 所持するアイテムをリストとして返すように設計すること. たとえば, return \['target', 'slash', 'double'\] のように.  
 Class Player の set_card() メソッドは, 設定する数字を返すように設計すること. 型は int でも str でも良い. 最高位が 0 の場合は, int で返すならば 0 は付けずに返して良く, str で返すならば 0 を付けても付けなくても良い. つまり, 結構汎用性は高くなってるのであまり気にしなくてOK. call() メソッドも同様.  
 あと, call() メソッドについて, 現段階では 334 のような数字が重複する call も許容してるんだけど, Numeron ルール的にこれは許容されるんだろうか?  
-Class Player の select_guard(), select_attack() メソッドは, 使用するアイテム名を str で返すように設計すること. 使用しない場合は return None とすること(return 'None' ではなくて). このとき注意が必要で, 上で述べたように, 所持アイテムのリストは Class Field に保管されていて, Class Player から直接アクセスすることはできないので, ちゃんと使用できるアイテムを選択しないと assert でエラーを吐かれる. 
+Class Player の select_guard(), select_attack() メソッドは, 使用するアイテム名を str で返すように設計すること. 使用しない場合は return None とすること(return 'None' ではなくて). このとき注意が必要で, 上で述べたように, 所持アイテムのリストは Class Field に保管されていて, Class Player から直接アクセスすることはできないので, ちゃんと使用できるアイテムを agent の中で記憶しておかないとマズイ. 使用できないアイテムを選択してしまうと assert でエラーを吐かれる. 
