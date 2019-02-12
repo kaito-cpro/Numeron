@@ -27,17 +27,11 @@ class Field:
         ''' アイテムが適切かどうかの判定 '''
         flg = True
         num_cnt = []
+        for item in ITEMS:
+            num_cnt.append(items.count(item))
 
         if len(items) != NUM_ITEMS:
             flg = False
-
-        num_cnt.append(items.count('double'))
-        num_cnt.append(items.count('high_and_low'))
-        num_cnt.append(items.count('target'))
-        num_cnt.append(items.count('slash'))
-        num_cnt.append(items.count('shuffle'))
-        num_cnt.append(items.count('change'))
-
         if sum(num_cnt) != NUM_ITEMS:
             flg = False
         for cnt in num_cnt:
