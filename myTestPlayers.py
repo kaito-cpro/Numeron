@@ -6,16 +6,19 @@ class MyTestPlayer1(Player):
 
     def __init__(self, player_num):
         self.player_num = player_num
+        self.items = None
+        self.my_card = None
         self.my_log = []
+
+    def set_items(self):
+        pass
 
     def set_card(self):
         while True:
             card = random.randint(0, 10**N-1)
             if self.check_card(card):
                 break
-
-        # print(f'playerC: set {card}.')  # 開発用
-
+        self.my_card = card
         return card
 
     def call(self):
@@ -56,6 +59,7 @@ class MyTestPlayer1(Player):
 
     def end_process(self, winner):
         # print(f'my_log = {self.my_log}')    # 開発用
+        print(f'MyTestPlayer の数字は {self.my_card} でした')  # 開発用
         self.my_log = []
         return
 

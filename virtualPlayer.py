@@ -33,6 +33,32 @@ class VirtualPlayer:
         ''' アイテムをセットする '''
         return self.player.set_items()
 
+    def select_guard(self):
+        ''' 使用する防御アイテムの選択 '''
+        return self.turn[self.player].select_guard()
+
+    def guard(self, guard_item):
+        ''' 防御アイテムの使用 '''
+        if guard_item == 'slash':
+            self.turn[self.player].slash()
+        elif guard_item == 'shuffle':
+            self.turn[self.player].shuffle()
+        elif guard_item == 'change':
+            self.turn[self.player].change()
+
+    def select_attack(self):
+        ''' 使用する攻撃アイテムの選択 '''
+        return self.player.select_attack()
+
+    def attack(self, attack_item):
+        ''' 攻撃アイテムの使用 '''
+        if attack_item == 'double':
+            self.player.double()
+        elif attack_item == 'high_and_low':
+            self.player.high_and_low()
+        elif attack_item == 'target':
+            self.player.target()
+
     def call(self):
         ''' 数字をコールする '''
         return self.player.call()
