@@ -11,7 +11,7 @@ class Game:
         self.turn = 0    # ターン数
         self.log = []   # ゲーム進行のログ
         self.winner = None
-        self.double = False  # 攻撃アイテム double が使用されたとき True
+        self.double_flg = 0  # 攻撃アイテム double が使用されたときのフラグ
 
     def play(self):
         ''' 1回ゲームを行う '''
@@ -20,7 +20,7 @@ class Game:
 
         while True:
             self.turn += 1
-            if USE_ITEMS and not self.double:
+            if USE_ITEMS and self.double_flg == 0:
                 self.guard()
                 self.attack()
             self.call()
@@ -33,9 +33,8 @@ class Game:
                 break
 
             # 攻撃アイテム double についての特別処理
-            if self.double:
-                self.double = False
-            if not self.double:
+            self.double_flg = max(0, self.double_flg - 1)
+            if self.double_flg == 0:
                 self.switch()
 
     def set_former_player(self):
@@ -62,7 +61,7 @@ class Game:
             self.field.items[self.player.player.player_num].remove(attack_item)
             self.player.attack(attack_item)
         if attack_item == 'double':
-            self.double = True
+            self.double_flg = 2
 
     def call(self):
         ''' 数字のコール '''
