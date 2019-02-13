@@ -7,12 +7,14 @@ class VirtualPlayer:
     def __init__(self):
         self.player1 = PlayerFactory.create_player(1)
         self.player2 = PlayerFactory.create_player(2)
-
         self.player = None
 
-        self.turn = {
+    def opponent(self):
+        ''' 相手プレイヤーのインスタンスを返す '''
+        turn = {
             self.player1: self.player2,
             self.player2: self.player1}
+        return turn[self.player]
 
     def set_former_player(self):
         ''' ランダムに先攻を決める '''
@@ -23,7 +25,7 @@ class VirtualPlayer:
 
     def switch(self):
         ''' 手番の交代 '''
-        self.player = self.turn[self.player]
+        self.player = self.opponent()
 
     def set_card(self):
         ''' 数字をセットする '''
@@ -35,16 +37,16 @@ class VirtualPlayer:
 
     def select_guard(self):
         ''' 使用する防御アイテムの選択 '''
-        return self.turn[self.player].select_guard()
+        return self.opponent().select_guard()
 
     def guard(self, guard_item):
         ''' 防御アイテムの使用 '''
         if guard_item == 'slash':
-            self.turn[self.player].slash()
+            self.opponent().slash()
         elif guard_item == 'shuffle':
-            self.turn[self.player].shuffle()
+            self.opponent().shuffle()
         elif guard_item == 'change':
-            self.turn[self.player].change()
+            self.opponent().change()
 
     def select_attack(self):
         ''' 使用する攻撃アイテムの選択 '''
@@ -61,7 +63,9 @@ class VirtualPlayer:
 
     def call(self):
         ''' 数字をコールする '''
-        return self.player.call()
+        call_num = self.player.call()
+        self.player.assert_call(call_num)
+        return call_num
 
     def end_process(self, winner):
         for i in range(2):
@@ -69,7 +73,7 @@ class VirtualPlayer:
             self.switch()
 
     def tell_call(self, call_num):
-        self.turn[self.player].get_call(call_num)
+        self.opponent().get_call(call_num)
 
     def tell_eat_bite(self, eat, bite):
         self.player.get_eat_bite(eat, bite)

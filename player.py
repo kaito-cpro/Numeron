@@ -88,3 +88,7 @@ class Player:
     def get_eat_bite(self, eat, bite):
         ''' Eat/Bite を環境から受け取る '''
         pass
+
+    def assert_call(self, call_num):
+        ''' コールした数字が不適切な場合に警告する '''
+        assert self.check_card(call_num)

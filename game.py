@@ -48,8 +48,9 @@ class Game:
         guard_item = self.player.select_guard()
         if guard_item != None:
             assert guard_item in GUARD_ITEMS
-            assert guard_item in self.field.items[self.player.turn[self.player.player].player_num]
-            self.field.items[self.player.turn[self.player.player].player_num].remove(guard_item)
+            self.field.assert_item(guard_item, self.player.opponent().player_num)
+
+            self.field.remove_item(guard_item, self.player.opponent().player_num)
             self.player.guard(guard_item)
 
     def attack(self):
@@ -57,9 +58,11 @@ class Game:
         attack_item = self.player.select_attack()
         if attack_item != None:
             assert attack_item in ATTACK_ITEMS
-            assert attack_item in self.field.items[self.player.player.player_num]
-            self.field.items[self.player.player.player_num].remove(attack_item)
+            self.field.assert_item(attack_item, self.player.player.player_num)
+
+            self.field.remove_item(attack_item, self.player.player.player_num)
             self.player.attack(attack_item)
+
         if attack_item == 'double':
             self.double_flg = 2
 
@@ -72,14 +75,13 @@ class Game:
     def write_log(self, player, call_num):
         ''' ログを記入する(player_num, call_num, eat, bite) '''
         eat, bite = 0, 0
-        card = self.field.get_card(3-player.player.player_num)  # 相手のカード
+        card = self.field.get_card(player.opponent().player_num)  # 相手のカード
 
         for i in range(len(card)):
-            if call_num[i] in card:
-                bite += card.count(call_num[i])
-                if call_num[i] == card[i]:
-                    eat += 1
-                    bite -= 1
+            if card[i] == call_num[i]:
+                eat += 1
+            elif call_num[i] in card:
+                bite += 1
 
         self.log.append([player.player.player_num, call_num, eat, bite])
 

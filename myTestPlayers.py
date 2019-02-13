@@ -49,11 +49,10 @@ class MyTestPlayer1(Player):
         num_log = str(num_log).zfill(N)
 
         for i in range(len(num)):
-            if num[i] in num_log:
-                bite -= num_log.count(num[i])
-                if num[i] == num_log[i]:
-                    eat -= 1
-                    bite += 1
+            if num[i] == num_log[i]:
+                eat -= 1
+            elif num[i] in num_log:
+                bite -= 1
 
         return (eat == bite == 0)
 

@@ -66,3 +66,11 @@ class Field:
 
     def get_items(self, player_num):
         return self.items[player_num]
+
+    def assert_item(self, item, player_num):
+        ''' アイテムが所持アイテムリストに入っていない場合に警告する '''
+        assert item in self.items[player_num]
+
+    def remove_item(self, item, player_num):
+        ''' アイテムを所持アイテムリストから取り除く '''
+        self.items[player_num].remove(item)
