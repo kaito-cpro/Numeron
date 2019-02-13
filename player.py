@@ -42,7 +42,7 @@ class Player:
 
     def set_card(self):
         ''' 数字をセットする
-            返り値の型は int, str のいずれでもよい '''
+            返り値の型は int, str のいずれでもよい(だが str を積極的に使用せよ) '''
         pass
 
     def select_guard(self):
