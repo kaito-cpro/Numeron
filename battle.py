@@ -31,12 +31,12 @@ class Battle:
             game = Game(self.virtual_player)
             game.play()
 
-            print('ended.', f'turn = {game.turn}.', f'winner = {self.player1 if game.winner==1 else self.player2}')  # 開発用            
+            print('ended.', f'turn = {game.turn}.', f'winner = {self.player1 if game.winner==1 else self.player2}')  # 開発用
 
             winner = game.get_winner()
             self.result.append(winner)
 
-            # print(game.log)  # 開発用
+            print(game.log)  # 開発用
 
         self.show_result(game)
 

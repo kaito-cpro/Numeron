@@ -1,5 +1,4 @@
 from common import *
-from virtualPlayer import VirtualPlayer
 
 class Field:
     ''' カードとアイテムの実装クラス '''
@@ -8,20 +7,10 @@ class Field:
         self.card = {1: None, 2: None}
         self.items = {1: [], 2: []}
 
-    def set_field(self, player):
-        if USE_ITEMS:
-            for i in range(2):
-                self.set_items(player.player)
-                player.switch()
-        for i in range(2):
-            self.set_card(player.player)
-            player.switch()
-
-    def set_items(self, player):
+    def set_items(self, player_num, items):
         ''' アイテムをセットする '''
-        items = player.set_items()
         assert self.check_items(items)
-        self.items[player.player_num] = items
+        self.items[player_num] = items
 
     def check_items(self, items):
         ''' アイテムが適切かどうかの判定 '''
@@ -42,11 +31,10 @@ class Field:
 
         return flg
 
-    def set_card(self, player):
+    def set_card(self, player_num, card):
         ''' 数字をセットする '''
-        card = str(player.set_card()).zfill(N)
         assert self.check_card(card)
-        self.card[player.player_num] = card
+        self.card[player_num] = card
 
     def check_card(self, card):
         ''' card の数字が適切かどうかの判定 '''

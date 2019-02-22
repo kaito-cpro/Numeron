@@ -1,5 +1,4 @@
 from common import *
-from field import Field
 from virtualPlayer import VirtualPlayer
 
 class Game:
@@ -7,7 +6,6 @@ class Game:
 
     def __init__(self, virtual_player):
         self.player = virtual_player
-        self.field = Field()
         self.turn = 0    # ターン数
         self.log = []   # ゲーム進行のログ
         self.winner = None
@@ -41,30 +39,19 @@ class Game:
         self.player.set_former_player()
 
     def set_field(self):
-        self.field.set_field(self.player)
+        self.player.set_field()
 
     def guard(self):
         ''' 防御アイテムの使用 '''
-        guard_item = self.player.select_guard()
-        if guard_item != None:
-            assert guard_item in GUARD_ITEMS
-            self.field.assert_item(guard_item, self.player.opponent().player_num)
-
-            self.field.remove_item(guard_item, self.player.opponent().player_num)
-            self.player.guard(guard_item)
+        guard_item = self.player.guard()
+        self.write_log(self.player, guard_item)
 
     def attack(self):
         ''' 攻撃アイテムの使用 '''
-        attack_item = self.player.select_attack()
-        if attack_item != None:
-            assert attack_item in ATTACK_ITEMS
-            self.field.assert_item(attack_item, self.player.player.player_num)
-
-            self.field.remove_item(attack_item, self.player.player.player_num)
-            self.player.attack(attack_item)
-
+        attack_item = self.player.attack()
         if attack_item == 'double':
             self.double_flg = 2
+        self.write_log(self.player, attack_item)
 
     def call(self):
         ''' 数字のコール '''
@@ -72,18 +59,31 @@ class Game:
         call_num = str(call_num).zfill(N)
         self.write_log(self.player, call_num)
 
-    def write_log(self, player, call_num):
-        ''' ログを記入する(player_num, call_num, eat, bite) '''
-        eat, bite = 0, 0
-        card = self.field.get_card(player.opponent().player_num)  # 相手のカード
+    def write_log(self, player, call_num_or_item):
+        ''' ログを記入する
+            コールの場合 (player_num, call_num, eat, bite)
+            アイテムの場合 (player_num, item) '''
+        if call_num_or_item == None:
+            return
+        elif call_num_or_item in ITEMS:
+            item = call_num_or_item
+            if item in GUARD_ITEMS:
+                player_num = self.player.opponent().player_num
+            elif item in ATTACK_ITEMS:
+                player_num = self.player.player.player_num
+            self.log.append([player_num, item])
+        else:
+            call_num = call_num_or_item
+            eat, bite = 0, 0
+            card = self.player.get_card(player.opponent().player_num)  # 相手のカード
 
-        for i in range(len(card)):
-            if card[i] == call_num[i]:
-                eat += 1
-            elif call_num[i] in card:
-                bite += 1
+            for i in range(len(card)):
+                if card[i] == call_num[i]:
+                    eat += 1
+                elif call_num[i] in card:
+                    bite += 1
 
-        self.log.append([player.player.player_num, call_num, eat, bite])
+            self.log.append([player.player.player_num, call_num, eat, bite])
 
     def tell_call(self):
         ''' callされたplayerに call を伝える '''

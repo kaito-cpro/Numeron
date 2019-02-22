@@ -23,7 +23,11 @@ class Random(Player):
         return items
 
     def call(self):
-        return random.randint(0, 10**N-1)
+        while True:
+            call_num = random.randint(0, 10**N-1)
+            if self.check_card(call_num):
+                break
+        return call_num
 
     def end_process(self, winner):
         print('Random: end_process() is called')  # 開発用
@@ -40,6 +44,11 @@ class Random(Player):
 class Human(Player):
     ''' 手動プレイヤー '''
 
+    def __init__(self, player_num):
+        self.player_num = player_num
+        self.items = None
+        self.card = None
+
     def set_items(self):
         while True:
             print('\nアイテムをセットしてください')
@@ -47,6 +56,7 @@ class Human(Player):
             print(items)
             if self.check_items(items):
                 break
+        self.items = items
         return items
 
     def set_card(self):
@@ -55,6 +65,7 @@ class Human(Player):
             card = input('card: ')
             if self.check_card(card):
                 break
+        self.card = card
         return card
 
     def select_guard(self):
@@ -75,9 +86,17 @@ class Human(Player):
         while True:
             print('\nコールしてください')
             call_num = input('your call: ')
-            if '0'.zfill(N) <= call_num <= str(10**N-1).zfill(N):
+            if self.check_card(call_num):
                 break
         return call_num
+
+    def shuffle(self):
+        while True:
+            print('\nシャッフルしてください')
+            new_card = input('new number: ')
+            if sorted(new_card) == sorted(self.card):
+                break
+        return new_card
 
     def end_process(self, winner):
         pass
