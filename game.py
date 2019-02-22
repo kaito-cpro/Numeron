@@ -72,8 +72,12 @@ class Game:
     def write_log(self, player, call_num_or_item, option=None):
         ''' ログを記入する
             コールの場合 (player_num, 'call', call_num, eat, bite)
-            アイテム(high_and_low 以外)の場合 (player_num, 'item', item)
-            high_and_low の場合 (player_num, 'item', item, high_and_low) '''
+            change の場合 (player_num, 'item', 'change', digit, high_and_low); digit は取り替えた桁(int)で high_and_low はその桁の High&Low. High ならば True
+            high_and_low の場合 (player_num, 'item', 'high_and_low', high_and_low); high_and_low は True/False のサイズ N の配列
+            slash の場合 (player_num, 'item', 'slash', slash); slash はスラッシュナンバー(int)
+            target の場合 (player_num, 'item', 'target', target_num, target); target_num はターゲットナンバー(str) で target はターゲットナンバーが含まれるならばその桁, 含まれないならば None
+            それ以外のアイテムの場合 (player_num, 'item', item)
+             '''
         if call_num_or_item in ITEMS:
             item = call_num_or_item
             if item in GUARD_ITEMS:
@@ -93,8 +97,8 @@ class Game:
                     self.log.append([player_num, 'item', item, slash])
                     return
                 elif item == 'target':
-                    target = option
-                    self.log.append([player_num, 'item', item, target])
+                    target_num, target = option
+                    self.log.append([player_num, 'item', item, target_num, target])
                     return
 
             self.log.append([player_num, 'item', item])

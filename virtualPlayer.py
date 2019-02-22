@@ -95,7 +95,7 @@ class VirtualPlayer:
         elif attack_item == 'target':
             target_num = self.player.target()
             assert '0' <= target_num <= '9'
-            option = self.get_target(self.opponent().player_num, target_num)
+            option = [target_num, self.get_target(self.opponent().player_num, target_num)]
         elif attack_item == 'slash':
             option = self.get_slash(self.opponent().player_num)
 
