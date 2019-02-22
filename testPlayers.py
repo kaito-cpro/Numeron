@@ -94,6 +94,26 @@ class Human(Player):
                 break
         return new_card
 
+    def target(self):
+        while True:
+            print('\nターゲットナンバーを入力してください')
+            target_num = input('target number: ')
+            if '0' <= target_num <= '9':
+                break
+        return target_num
+
+    def change(self):
+        while True:
+            print('\nチェンジする桁を入力してください')
+            digit = int(input('digit: '))
+            if not (0 <= digit <= N):
+                continue
+            print('チェンジする新たな数字を入力してください')
+            new_num = input('new_num: ')
+            if '0' <= new_num <= '9':
+                break
+        return digit, new_num
+
     def end_process(self, winner):
         pass
 

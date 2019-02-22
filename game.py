@@ -45,22 +45,22 @@ class Game:
 
     def guard(self):
         ''' 防御アイテムの使用 '''
-        guard_item = self.player.guard()
+        guard_item, option = self.player.guard()
         if guard_item == None:
             return False
         else:
-            self.write_log(self.player, guard_item)
+            self.write_log(self.player, guard_item, option)
             return True
 
     def attack(self):
         ''' 攻撃アイテムの使用 '''
-        attack_item = self.player.attack()
+        attack_item, option = self.player.attack()
         if attack_item == None:
             return False
         else:
             if attack_item == 'double':
                 self.double_flg = 2
-            self.write_log(self.player, attack_item)
+            self.write_log(self.player, attack_item, option)
             return True
 
     def call(self):
@@ -69,7 +69,7 @@ class Game:
         call_num = str(call_num).zfill(N)
         self.write_log(self.player, call_num)
 
-    def write_log(self, player, call_num_or_item):
+    def write_log(self, player, call_num_or_item, option=None):
         ''' ログを記入する
             コールの場合 (player_num, 'call', call_num, eat, bite)
             アイテム(high_and_low 以外)の場合 (player_num, 'item', item)
@@ -78,12 +78,25 @@ class Game:
             item = call_num_or_item
             if item in GUARD_ITEMS:
                 player_num = self.player.opponent().player_num
+                if item == 'change':
+                    digit, high_and_low = option
+                    self.log.append([player_num, 'item', item, digit, high_and_low])
+                    return
             elif item in ATTACK_ITEMS:
                 player_num = self.player.player.player_num
                 if item == 'high_and_low':
-                    high_and_low = self.get_high_and_low(self.player.opponent().player_num)
+                    high_and_low = option
                     self.log.append([player_num, 'item', item, high_and_low])
                     return
+                elif item == 'slash':
+                    slash = option
+                    self.log.append([player_num, 'item', item, slash])
+                    return
+                elif item == 'target':
+                    target = option
+                    self.log.append([player_num, 'item', item, target])
+                    return
+
             self.log.append([player_num, 'item', item])
         else:
             call_num = call_num_or_item
@@ -97,9 +110,6 @@ class Game:
                     bite += 1
 
             self.log.append([player.player.player_num, 'call', call_num, eat, bite])
-
-    def get_high_and_low(self, player_num):
-        return self.player.get_high_and_low(player_num)
 
     def tell_log(self):
         ''' playerに log を伝える '''

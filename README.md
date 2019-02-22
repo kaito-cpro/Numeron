@@ -13,7 +13,7 @@ Class Field には各 agent の数字とアイテムをメンバ変数として�
 
 testPlayers.py の中の Class Random と Class Human に関しては, 取り敢えずはアイテム込みで動く用にはなってる.  
 Random は, 数字もアイテムもランダムに選び, アイテムの使用はしないようになってる(アイテム選択メソッドの中身が pass なので, アイテムとして常に None を返す).  
-Human は手動なのでアイテムを使用できるが, アイテムの具体的な挙動は未実装なので, Field インスタンス内の所持アイテムリストからアイテムが減るだけ. 攻撃アイテム double, high_and_low と防御アイテム shuffle を使った場合だけはちゃんと動作するようになってるはず. double については, Class Game の中の self.double_flg をフラグとして用いて実現してるんだけど, 書き方があまり美しくない(可読性が悪い)ので, 改良の余地あり.  
+Human はすべてのアイテムを実装済. double については, Class Game の中の self.double_flg をフラグとして用いて実現してるんだけど, 書き方があまり美しくない(可読性が悪い)ので, 改良の余地あり.  
 myTestPlayers.py の中はアイテムには非対応なので, common.py で USE_ITEMS=False にすれば動くはず.
 
 基本的なレギュレーションについて  
