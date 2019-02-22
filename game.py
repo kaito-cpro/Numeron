@@ -19,12 +19,14 @@ class Game:
         while True:
             self.turn += 1
             if USE_ITEMS and self.double_flg == 0:
-                self.guard()
-                self.attack()
+                guard = self.guard()
+                if guard:
+                    self.tell_log()
+                attack = self.attack()
+                if attack:
+                    self.tell_log()
             self.call()
-            # print('call: ', self.log[-1])  # 開発用
-            self.tell_call()
-            self.tell_eat_bite()
+            self.tell_log()
             if self.ended():
                 self.set_winner()
                 self.tell_result()
@@ -44,14 +46,22 @@ class Game:
     def guard(self):
         ''' 防御アイテムの使用 '''
         guard_item = self.player.guard()
-        self.write_log(self.player, guard_item)
+        if guard_item == None:
+            return False
+        else:
+            self.write_log(self.player, guard_item)
+            return True
 
     def attack(self):
         ''' 攻撃アイテムの使用 '''
         attack_item = self.player.attack()
-        if attack_item == 'double':
-            self.double_flg = 2
-        self.write_log(self.player, attack_item)
+        if attack_item == None:
+            return False
+        else:
+            if attack_item == 'double':
+                self.double_flg = 2
+            self.write_log(self.player, attack_item)
+            return True
 
     def call(self):
         ''' 数字のコール '''
@@ -61,17 +71,15 @@ class Game:
 
     def write_log(self, player, call_num_or_item):
         ''' ログを記入する
-            コールの場合 (player_num, call_num, eat, bite)
-            アイテムの場合 (player_num, item) '''
-        if call_num_or_item == None:
-            return
-        elif call_num_or_item in ITEMS:
+            コールの場合 (player_num, 'call', call_num, eat, bite)
+            アイテムの場合 (player_num, 'item', item) '''
+        if call_num_or_item in ITEMS:
             item = call_num_or_item
             if item in GUARD_ITEMS:
                 player_num = self.player.opponent().player_num
             elif item in ATTACK_ITEMS:
                 player_num = self.player.player.player_num
-            self.log.append([player_num, item])
+            self.log.append([player_num, 'item', item])
         else:
             call_num = call_num_or_item
             eat, bite = 0, 0
@@ -83,21 +91,16 @@ class Game:
                 elif call_num[i] in card:
                     bite += 1
 
-            self.log.append([player.player.player_num, call_num, eat, bite])
+            self.log.append([player.player.player_num, 'call', call_num, eat, bite])
 
-    def tell_call(self):
-        ''' callされたplayerに call を伝える '''
-        call_num = self.log[-1][1]
-        self.player.tell_call(call_num)
-
-    def tell_eat_bite(self):
-        ''' callしたplayerに Eat/Bite を伝える '''
-        eat, bite = self.log[-1][2:4]
-        self.player.tell_eat_bite(eat, bite)
+    def tell_log(self):
+        ''' playerに log を伝える '''
+        log = self.log[-1]
+        self.player.tell_log(log)
 
     def ended(self):
         ''' ゲームが終了したかどうかの判定 '''
-        eat = self.log[-1][2]
+        eat = self.log[-1][3]
         return eat == N
 
     def set_winner(self):

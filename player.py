@@ -80,13 +80,8 @@ class Player:
         ''' ゲーム終了時の処理 '''
         pass
 
-    def get_call(self, call_num):
-        ''' 相手の call を環境から受け取る
-            call_num の型は str '''
-        pass
-
-    def get_eat_bite(self, eat, bite):
-        ''' Eat/Bite を環境から受け取る '''
+    def get_log(self, log):
+        ''' 何かアクションがあったときに log を環境から受け取る '''
         pass
 
     def assert_call(self, call_num):

@@ -33,12 +33,8 @@ class Random(Player):
         print('Random: end_process() is called')  # 開発用
         return
 
-    def get_call(self, call_num):
-        print('Random: get_call() is called.', f'call_num = {call_num}.')  # 開発用
-        return
-
-    def get_eat_bite(self, eat, bite):
-        print('Random: get_eat_bite() is called.', f'eat = {eat}.', f'bite = {bite}.')  # 開発用
+    def get_log(self, log):
+        print('Random: get_log() is called.', f'log = {log}.')  # 開発用
         return
 
 class Human(Player):
@@ -101,8 +97,5 @@ class Human(Player):
     def end_process(self, winner):
         pass
 
-    def get_call(self, call_num):
-        print(f'\n相手のコールは {call_num} です')
-
-    def get_eat_bite(self, eat, bite):
-        print(f'\n{eat}eat {bite}bite です')
+    def get_log(self, log):
+        print(f'\nログ受信: {log}')

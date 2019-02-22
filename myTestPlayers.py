@@ -22,6 +22,7 @@ class MyTestPlayer1(Player):
         return card
 
     def call(self):
+        ''' 現段階で動かない '''
         while True:
             if len(self.log) == 0:
                 call_num = str(random.randint(0, 10**N-1)).zfill(N)
@@ -45,7 +46,6 @@ class MyTestPlayer1(Player):
             if self.check_card(call_num):
                 break
 
-        self.log.append(call_num)
         return call_num
 
     def fill_eat_bite(self, num, num_log, eat, bite):
@@ -66,8 +66,5 @@ class MyTestPlayer1(Player):
         self.log = []
         return
 
-    def get_call(self, call_num):
-        pass
-
-    def get_eat_bite(self, eat, bite):
-        self.log[-1] = [self.log[-1], eat, bite]
+    def get_log(self, log):
+        self.log.append(log)

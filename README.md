@@ -2,6 +2,10 @@
 
 battle.py を起動してプログラムを開始する.  
 
+大幅な改良点  
+* Class Field の場所を変更した(Class Game から import していたのを, Class VirtualPlayer からの import に変更).  
+* Class Player のメソッド get_call() と get_eat_bite() を一括して get_log() にまとめた. get_log() は, 何かアクション(コールまたはアイテム)があったときにそのログを受け取るメソッドである. log のレギュレーションについては Class Game の write_log() メソッドを参照のこと.  
+  
 基本的な構造としては, Class Battle が大元のクラス.  
 Class Game はゲームを1回行うクラスで, Class VirtualPlayer と Class Field と繋がってる.->改良: Class Field は Class VirtualPlayer との接続にした(これにより, Class Game の抽象性を高めた(複雑な処理を Class VirtualPlayer に一任できた)).  
 Class VirtualPlayer は Class Player と繋がってて,  Class Player は抽象インターフェースとして機能するので, この下に agent を継承させて実装していく感じ.  

@@ -98,11 +98,10 @@ class VirtualPlayer:
             self.player.end_process(winner)
             self.switch()
 
-    def tell_call(self, call_num):
-        self.opponent().get_call(call_num)
-
-    def tell_eat_bite(self, eat, bite):
-        self.player.get_eat_bite(eat, bite)
+    def tell_log(self, log):
+        for i in range(2):
+            self.player.get_log(log)
+            self.switch()
 
     def get_card(self, player_num):
         return self.field.get_card(player_num)
