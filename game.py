@@ -71,7 +71,7 @@ class Game:
 
     def write_log(self, player, call_num_or_item, option=None):
         ''' ログを記入する
-            コールの場合 (player_num, 'call', call_num, eat, bite)
+            コールの場合 (player_num, 'call', call_num, eat, bite); call_num はコールした数字(str). eat, bite は int
             change の場合 (player_num, 'item', 'change', digit, high_and_low); digit は取り替えた桁(int)で high_and_low はその桁の High&Low. High ならば True
             high_and_low の場合 (player_num, 'item', 'high_and_low', high_and_low); high_and_low は True/False のサイズ N の配列
             slash の場合 (player_num, 'item', 'slash', slash); slash はスラッシュナンバー(int)
