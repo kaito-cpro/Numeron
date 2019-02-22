@@ -5,7 +5,7 @@ battle.py を起動してプログラムを開始する.
 大幅な改良点  
 * Class Field の場所を変更した(Class Game から import していたのを, Class VirtualPlayer からの import に変更).  
 * Class Player のメソッド get_call() と get_eat_bite() を一括して get_log() にまとめた. get_log() は, 何かアクション(コールまたはアイテム)があったときにそのログを受け取るメソッドである. log のレギュレーションについては Class Game の write_log() メソッドを参照のこと.  
-  
+
 基本的な構造としては, Class Battle が大元のクラス.  
 Class Game はゲームを1回行うクラスで, Class VirtualPlayer と Class Field と繋がってる.->改良: Class Field は Class VirtualPlayer との接続にした(これにより, Class Game の抽象性を高めた(複雑な処理を Class VirtualPlayer に一任できた)).  
 Class VirtualPlayer は Class Player と繋がってて,  Class Player は抽象インターフェースとして機能するので, この下に agent を継承させて実装していく感じ.  
@@ -13,7 +13,7 @@ Class Field には各 agent の数字とアイテムをメンバ変数として�
 
 testPlayers.py の中の Class Random と Class Human に関しては, 取り敢えずはアイテム込みで動く用にはなってる.  
 Random は, 数字もアイテムもランダムに選び, アイテムの使用はしないようになってる(アイテム選択メソッドの中身が pass なので, アイテムとして常に None を返す).  
-Human は手動なのでアイテムを使用できるが, アイテムの具体的な挙動は未実装なので, Field インスタンス内の所持アイテムリストからアイテムが減るだけ. 攻撃アイテム double と防御アイテム shuffle を使った場合だけはちゃんと動作するようになってるはず. double については, Class Game の中の self.double_flg をフラグとして用いて実現してるんだけど, 書き方があまり美しくない(可読性が悪い)ので, 改良の余地あり.  
+Human は手動なのでアイテムを使用できるが, アイテムの具体的な挙動は未実装なので, Field インスタンス内の所持アイテムリストからアイテムが減るだけ. 攻撃アイテム double, high_and_low と防御アイテム shuffle を使った場合だけはちゃんと動作するようになってるはず. double については, Class Game の中の self.double_flg をフラグとして用いて実現してるんだけど, 書き方があまり美しくない(可読性が悪い)ので, 改良の余地あり.  
 myTestPlayers.py の中はアイテムには非対応なので, common.py で USE_ITEMS=False にすれば動くはず.
 
 基本的なレギュレーションについて  

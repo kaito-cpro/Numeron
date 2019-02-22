@@ -78,7 +78,7 @@ class VirtualPlayer:
         if attack_item == 'double':
             pass    # これで実装できている
         elif attack_item == 'high_and_low':
-            self.player.high_and_low()
+            pass    # これで実装できている
         elif attack_item == 'target':
             self.player.target()
         elif guard_item == 'slash':
@@ -86,6 +86,12 @@ class VirtualPlayer:
 
         self.field.remove_item(attack_item, self.player.player_num)
         return attack_item
+
+    def get_high_and_low(self, player_num):
+        card = list(self.field.get_card(player_num))
+        card = np.array(card)
+        high_and_low = (card>='5')
+        return high_and_low
 
     def call(self):
         ''' 数字をコールする '''

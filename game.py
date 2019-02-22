@@ -72,13 +72,18 @@ class Game:
     def write_log(self, player, call_num_or_item):
         ''' ログを記入する
             コールの場合 (player_num, 'call', call_num, eat, bite)
-            アイテムの場合 (player_num, 'item', item) '''
+            アイテム(high_and_low 以外)の場合 (player_num, 'item', item)
+            high_and_low の場合 (player_num, 'item', item, high_and_low) '''
         if call_num_or_item in ITEMS:
             item = call_num_or_item
             if item in GUARD_ITEMS:
                 player_num = self.player.opponent().player_num
             elif item in ATTACK_ITEMS:
                 player_num = self.player.player.player_num
+                if item == 'high_and_low':
+                    high_and_low = self.get_high_and_low(self.player.opponent().player_num)
+                    self.log.append([player_num, 'item', item, high_and_low])
+                    return
             self.log.append([player_num, 'item', item])
         else:
             call_num = call_num_or_item
@@ -92,6 +97,9 @@ class Game:
                     bite += 1
 
             self.log.append([player.player.player_num, 'call', call_num, eat, bite])
+
+    def get_high_and_low(self, player_num):
+        return self.player.get_high_and_low(player_num)
 
     def tell_log(self):
         ''' playerに log を伝える '''
