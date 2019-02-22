@@ -36,7 +36,7 @@ class Battle:
             winner = game.get_winner()
             self.result.append(winner)
 
-            print(game.log)  # 開発用
+            game.show_log()  # 開発用
 
         self.show_result(game)
 

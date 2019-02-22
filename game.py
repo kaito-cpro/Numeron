@@ -135,6 +135,11 @@ class Game:
         ''' 各playerにゲームの結果を伝える '''
         self.player.end_process(self.winner)
 
+    def show_log(self):
+        print('log:')
+        for log in self.log:
+            print(log)
+
     def switch(self):
         ''' 手番の交代 '''
         self.player.switch()
