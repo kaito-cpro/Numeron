@@ -41,7 +41,10 @@ class Game:
         self.player.set_former_player()
 
     def set_field(self):
-        self.player.set_field()
+        if USE_ITEMS:
+            items = self.player.set_items()
+            self.write_log(self.player, items, 'set_items')
+        self.player.set_card()
 
     def guard(self):
         ''' 防御アイテムの使用 '''
@@ -71,6 +74,7 @@ class Game:
 
     def write_log(self, player, call_num_or_item, option=None):
         ''' ログを記入する
+            アイテムのセットの場合 (player_num, 'set_items', items); items は配列
             コールの場合 (player_num, 'call', call_num, eat, bite); call_num はコールした数字(str). eat, bite は int
             change の場合 (player_num, 'item', 'change', digit, high_and_low); digit は取り替えた桁(int)で high_and_low はその桁の High&Low. High ならば True
             high_and_low の場合 (player_num, 'item', 'high_and_low', high_and_low); high_and_low は True/False のサイズ N の配列
@@ -78,7 +82,16 @@ class Game:
             target の場合 (player_num, 'item', 'target', target_num, target); target_num はターゲットナンバー(str) で target はターゲットナンバーが含まれるならばその桁, 含まれないならば None
             それ以外のアイテムの場合 (player_num, 'item', item)
              '''
-        if call_num_or_item in ITEMS:
+        if option == 'set_items':
+            items = call_num_or_item
+            print('iotems: ', items)
+            print('items[0]: ', items[0])
+            print('items[1]: ', items[1])
+            self.log.append([self.player.player.player_num, 'set_items', items[0]])
+            self.tell_log()
+            self.log.append([self.player.opponent().player_num, 'set_items', items[1]])
+            self.tell_log()
+        elif call_num_or_item in ITEMS:
             item = call_num_or_item
             if item in GUARD_ITEMS:
                 player_num = self.player.opponent().player_num

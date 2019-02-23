@@ -5,7 +5,7 @@ class Random(Player):
     ''' テストプレイヤー '''
 
     def set_card(self):
-        print('Random: set_card() is called')   # 開発用
+        # print('Random: set_card() is called')   # 開発用
         while True:
             card = str(random.randint(0, 10**N-1)).zfill(N)
             if self.check_card(card):
@@ -14,12 +14,12 @@ class Random(Player):
         return card
 
     def set_items(self):
-        print('Random: set_items() is called')  # 開発用
+        # print('Random: set_items() is called')  # 開発用
         while True:
             items = random.sample(ITEMS, NUM_ITEMS)
             if self.check_items(items):
                 break
-        print(f'Random: set {items}')   # 開発用
+        # print(f'Random: set {items}')   # 開発用
         return items
 
     def call(self):
@@ -30,11 +30,11 @@ class Random(Player):
         return call_num
 
     def end_process(self, winner):
-        print('Random: end_process() is called')  # 開発用
+        # print('Random: end_process() is called')  # 開発用
         return
 
     def get_log(self, log):
-        print('Random: get_log() is called.', f'log = {log}.')  # 開発用
+        # print('Random: get_log() is called.', f'log = {log}.')  # 開発用
         return
 
 class Human(Player):
@@ -49,7 +49,6 @@ class Human(Player):
         while True:
             print('\nアイテムをセットしてください')
             items = input().split()
-            print(items)
             if self.check_items(items):
                 break
         self.items = items

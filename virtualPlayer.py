@@ -25,13 +25,18 @@ class VirtualPlayer:
         else:
             self.player = self.player2
 
-    def set_field(self):
-        ''' アイテムとカードをセットする '''
-        if USE_ITEMS:
-            for i in range(2):
-                items = self.player.set_items()
-                self.field.set_items(self.player.player_num, items)
-                self.switch()
+    def set_items(self):
+        ''' アイテムをセットする '''
+        res = []
+        for i in range(2):
+            items = self.player.set_items()
+            self.field.set_items(self.player.player_num, items)
+            res.append(items)
+            self.switch()
+        return res
+
+    def set_card(self):
+        ''' カードをセットする '''
         for i in range(2):
             card = str(self.player.set_card()).zfill(N)
             self.field.set_card(self.player.player_num, card)
@@ -40,14 +45,6 @@ class VirtualPlayer:
     def switch(self):
         ''' 手番の交代 '''
         self.player = self.opponent()
-
-    def set_card(self):
-        ''' 数字をセットする '''
-        return self.player.set_card()
-
-    def set_items(self):
-        ''' アイテムをセットする '''
-        return self.player.set_items()
 
     def guard(self):
         ''' 防御アイテムの使用 '''
@@ -106,7 +103,7 @@ class VirtualPlayer:
         card = list(self.field.get_card(player_num))
         card = np.array(card)
         high_and_low = (card>='5')
-        return high_and_low
+        return list(high_and_low)
 
     def get_slash(self, player_num):
         card = list(self.field.get_card(player_num))

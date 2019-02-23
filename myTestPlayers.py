@@ -6,12 +6,23 @@ class MyTestPlayer1(Player):
 
     def __init__(self, player_num):
         self.player_num = player_num
-        self.items = None
+        self.guard_items = None
+        self.attack_items = None
         self.card = None
         self.log = []
+        self.epsilon = 0.2
 
     def set_items(self):
-        pass
+        while True:
+            items = random.choice(ITEMS, 3)
+            if self.check_items(items):
+                break
+        for item in items:
+            if item in GUARD_ITEMS:
+                self.guard_items.append(item)
+            elif item in ATTACK_ITEMS:
+                self.attack_items.append(item)
+        return items
 
     def set_card(self):
         while True:
@@ -20,6 +31,33 @@ class MyTestPlayer1(Player):
                 break
         self.card = card
         return card
+
+    def select_guard(self):
+        if self.guard_items == []:
+            return None
+        else:
+            if random.random(0, 1) < self.epsilon:
+                guard_item = random.choice(self.guard_items)
+                self.guard_items.remove(guard_item)
+                return guard_item
+
+    def select_attack(self):
+        if self.attack_items == []:
+            return None
+        else:
+            if random.random(0, 1) < self.epsilon:
+                attack_item = random.choice(self.attack_items)
+                self.attack_items.remove(attack_item)
+                return attack_item
+
+    def shuffle(self):
+        pass
+
+    def target(self):
+        pass
+
+    def change(self):
+        pass
 
     def call(self):
         ''' 現段階で動かない '''
