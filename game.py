@@ -84,12 +84,9 @@ class Game:
              '''
         if option == 'set_items':
             items = call_num_or_item
-            print('iotems: ', items)
-            print('items[0]: ', items[0])
-            print('items[1]: ', items[1])
-            self.log.append([self.player.player.player_num, 'set_items', items[0]])
+            self.log.append([self.player.player.player_num, 'set_items', list(items[0])])
             self.tell_log()
-            self.log.append([self.player.opponent().player_num, 'set_items', items[1]])
+            self.log.append([self.player.opponent().player_num, 'set_items', list(items[1])])
             self.tell_log()
         elif call_num_or_item in ITEMS:
             item = call_num_or_item
