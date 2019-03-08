@@ -14,6 +14,9 @@ class Field:
 
     def check_items(self, items):
         ''' アイテムが適切かどうかの判定 '''
+        if BATTLE_TYPE == 'AI_vs_AI':
+            return set(items) == set(['shuffle', 'high_and_low', 'slash'])
+
         flg = True
         num_cnt = []
         for item in ITEMS:

@@ -12,7 +12,7 @@ class PlayerFactory:
 
     def create_player(player_num):
         print(f'player{player_num}を選択してください')
-        print(PlayerFactory.player_dict)
+        print('  ', PlayerFactory.player_dict)
         selected_player = int(input((f'player{player_num}: ')))
 
         player_class = PlayerFactory.player_dict[selected_player]

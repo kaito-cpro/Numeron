@@ -8,6 +8,9 @@ class Player:
 
     def check_items(self, items):
         ''' アイテムが適切かどうかの判定 '''
+        if BATTLE_TYPE == 'AI_vs_AI':
+            return set(items) == set(['shuffle', 'high_and_low', 'slash'])
+
         flg = True
         num_cnt = []
         for item in ITEMS:
@@ -38,7 +41,8 @@ class Player:
 
     def set_items(self):
         ''' アイテムをセットする '''
-        pass
+        if BATTLE_TYPE == 'AI_vs_AI':
+            return ['shuffle', 'high_and_low', 'slash']
 
     def set_card(self):
         ''' 数字をセットする

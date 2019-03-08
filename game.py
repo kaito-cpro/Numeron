@@ -11,31 +11,32 @@ class Game:
         self.winner = None
         self.double_flg = 0  # 攻撃アイテム double が使用されたときのフラグ
 
-    def play(self):
-        ''' 1回ゲームを行う '''
+    def play(self, times):
+        ''' times 回ゲームを行う '''
         self.set_former_player()
         self.set_field()
 
-        while True:
-            self.turn += 1
-            if USE_ITEMS and self.double_flg == 0:
-                guard = self.guard()
-                if guard:
-                    self.tell_log()
-                attack = self.attack()
-                if attack:
-                    self.tell_log()
-            self.call()
-            self.tell_log()
-            if self.ended():
-                self.set_winner()
-                self.tell_result()
-                break
+        for i in range(times):
+            while True:
+                self.turn += 1
+                if USE_ITEMS and self.double_flg == 0:
+                    guard = self.guard()
+                    if guard:
+                        self.tell_log()
+                    attack = self.attack()
+                    if attack:
+                        self.tell_log()
+                self.call()
+                self.tell_log()
+                if self.ended():
+                    self.set_winner()
+                    self.tell_result()
+                    break
 
-            # 攻撃アイテム double についての特別処理
-            self.double_flg = max(0, self.double_flg - 1)
-            if self.double_flg == 0:
-                self.switch()
+                # 攻撃アイテム double についての特別処理
+                self.double_flg = max(0, self.double_flg - 1)
+                if self.double_flg == 0:
+                    self.switch()
 
     def set_former_player(self):
         self.player.set_former_player()

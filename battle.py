@@ -29,7 +29,10 @@ class Battle:
         ''' 指定回数回の対戦を行う '''
         for i in range(self.times):
             game = Game(self.virtual_player)
-            game.play()
+            if BATTLE_TYPE == 'AI_vs_AI':   # AI vs AI の場合
+                game.play(3)    # 3回のゲームを1セットで行う
+            elif BATTLE_TYPE != 'AI_vs_AI':   # AI vs AI 以外の場合
+                game.play(1)
 
             print('ended.', f'turn = {game.turn}.', f'winner = {self.player1 if game.winner==1 else self.player2}')  # 開発用
 
