@@ -10,3 +10,4 @@ GUARD_ITEMS = ['shuffle', 'change']    # 防御アイテム
 ATTACK_ITEMS = ['high_and_low', 'slash', 'target', 'double']   # 攻撃アイテム
 ITEMS = GUARD_ITEMS + ATTACK_ITEMS
 BATTLE_TYPE = 'AI_vs_AI'  # 'AI_vs_AI' または 'Human'
+TIMEOUT_SEC = 5  # call() の制限時間

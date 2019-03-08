@@ -78,7 +78,11 @@ class Game:
 
     def call(self):
         ''' 数字のコール '''
-        call_num = self.player.call()
+        try:
+            call_num = self.player.call()
+        except:
+            print('time out')
+            return
         call_num = str(call_num).zfill(N)
         self.write_log(self.player, call_num)
 
