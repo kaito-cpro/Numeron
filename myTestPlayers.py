@@ -39,12 +39,6 @@ class MyTestPlayer1(Player):
     def shuffle(self):
         pass
 
-    def target(self):
-        pass
-
-    def change(self):
-        pass
-
     def call(self):
         self.time += 1
         print(self.time)

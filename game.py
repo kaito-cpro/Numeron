@@ -16,6 +16,7 @@ class Game:
         self.set_former_player()
         self.set_field()
 
+        won = {1: 0, 2: 0}  # times 回のゲームにおける各プレイヤーの勝数
         for i in range(times):
             while True:
                 self.turn += 1
@@ -31,12 +32,20 @@ class Game:
                 if self.ended():
                     self.set_winner()
                     self.tell_result()
+                    won[self.winner] += 1
                     break
 
                 # 攻撃アイテム double についての特別処理
                 self.double_flg = max(0, self.double_flg - 1)
                 if self.double_flg == 0:
                     self.switch()
+
+        if won[1] > won[2]:
+            self.winner = 1
+        elif won[1] < won[2]:
+            self.winner = 2
+        else:
+            self.winner = None
 
     def set_former_player(self):
         self.player.set_former_player()

@@ -53,9 +53,6 @@ class Player:
         ''' 使用する防御アイテムの選択 '''
         pass
 
-    def slash(self):
-        pass
-
     def shuffle(self):
         pass
 
@@ -64,12 +61,6 @@ class Player:
 
     def select_attack(self):
         ''' 使用する攻撃アイテムの選択 '''
-        pass
-
-    def double(self):
-        pass
-
-    def high_and_low(self):
         pass
 
     def target(self):
