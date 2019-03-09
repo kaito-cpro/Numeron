@@ -11,6 +11,7 @@ class VirtualPlayer:
         self.player1 = PlayerFactory.create_player(1)
         self.player2 = PlayerFactory.create_player(2)
         self.player = None
+        self.cards_record = []  # 各プレイヤーがセットした数字の記録
 
     def opponent(self):
         ''' 相手プレイヤーのインスタンスを返す '''
@@ -41,6 +42,7 @@ class VirtualPlayer:
         for i in range(2):
             card = str(self.player.set_card()).zfill(N)
             self.field.set_card(self.player.player_num, card)
+            self.cards_record.append([self.player.player_num, 'set_card', card])
             self.switch()
 
     def switch(self):
@@ -118,16 +120,20 @@ class VirtualPlayer:
         else:
             return None
 
-    @timeout(TIMEOUT_SEC)
+    # @timeout(TIMEOUT_SEC)
     def call(self):
         ''' 数字をコールする '''
         call_num = self.player.call()
         self.player.assert_call(call_num)
         return call_num
 
-    def end_process(self, winner):
+    def end_process(self, winner, tell_cards=False):
         for i in range(2):
-            self.player.end_process(winner)
+            if tell_cards:
+                self.player.end_process(winner, self.cards_record)
+                self.cards_record = []
+            else:
+                self.player.end_process(winner, None)
             self.switch()
 
     def tell_log(self, log):

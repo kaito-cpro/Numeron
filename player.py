@@ -71,7 +71,7 @@ class Player:
             返り値の型は int, str のいずれでもよい '''
         pass
 
-    def end_process(self, winner):
+    def end_process(self, winner, cards_record):
         ''' ゲーム終了時の処理 '''
         pass
 

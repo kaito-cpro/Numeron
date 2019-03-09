@@ -14,10 +14,11 @@ class Game:
     def play(self, times):
         ''' times 回ゲームを行う '''
         self.set_former_player()
-        self.set_field()
+        self.set_items()
 
         won = {1: 0, 2: 0}  # times 回のゲームにおける各プレイヤーの勝数
         for i in range(times):
+            self.set_card()
             while True:
                 self.turn += 1
                 if USE_ITEMS and self.double_flg == 0:
@@ -31,8 +32,11 @@ class Game:
                 self.tell_log()
                 if self.ended():
                     self.set_winner()
-                    self.tell_result()
                     won[self.winner] += 1
+                    if i < times - 1:
+                        self.tell_result(tell_cards=False)
+                    else:
+                        self.tell_result(tell_cards=True)   # セットしていた数字を伝える
                     break
 
                 # 攻撃アイテム double についての特別処理
@@ -50,10 +54,12 @@ class Game:
     def set_former_player(self):
         self.player.set_former_player()
 
-    def set_field(self):
+    def set_items(self):
         if USE_ITEMS:
             items = self.player.set_items()
             self.write_log(self.player, items, 'set_items')
+
+    def set_card(self):
         self.player.set_card()
 
     def guard(self):
@@ -155,9 +161,12 @@ class Game:
     def get_winner(self):
         return self.winner
 
-    def tell_result(self):
+    def tell_result(self, tell_cards=False):
         ''' 各playerにゲームの結果を伝える '''
-        self.player.end_process(self.winner)
+        if tell_cards:
+            self.player.end_process(self.winner, tell_cards=True)
+        else:
+            self.player.end_process(self.winner, tell_cards=False)
 
     def show_log(self):
         print('log:')

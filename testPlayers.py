@@ -29,7 +29,7 @@ class Random(Player):
                 break
         return call_num
 
-    def end_process(self, winner):
+    def end_process(self, winner, cards_record):
         # print('Random: end_process() is called')  # 開発用
         return
 
@@ -113,8 +113,8 @@ class Human(Player):
                 break
         return digit, new_num
 
-    def end_process(self, winner):
-        pass
+    def end_process(self, winner, cards_record):
+        print(f'cards_record: {cards_record}')
 
     def get_log(self, log):
         print(f'\nログ受信: {log}')

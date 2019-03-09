@@ -59,7 +59,7 @@ class MyTestPlayer1(Player):
 
         return (eat == bite == 0)
 
-    def end_process(self, winner):
+    def end_process(self, winner, cards_record):
         # print(f'log = {self.log}')    # 開発用
         print(f'MyTestPlayer の数字は {self.card} でした')  # 開発用
         self.log = []
