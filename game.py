@@ -37,6 +37,7 @@ class Game:
                         self.tell_result(tell_cards=False)
                     else:
                         self.tell_result(tell_cards=True)   # セットしていた数字を伝える
+                    self.switch()
                     break
 
                 # 攻撃アイテム double についての特別処理

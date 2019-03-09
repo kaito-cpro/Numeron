@@ -114,6 +114,7 @@ class Human(Player):
         return digit, new_num
 
     def end_process(self, winner, cards_record):
+        print(f'winer: {winner}')
         print(f'cards_record: {cards_record}')
 
     def get_log(self, log):

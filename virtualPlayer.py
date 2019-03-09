@@ -120,7 +120,7 @@ class VirtualPlayer:
         else:
             return None
 
-    # @timeout(TIMEOUT_SEC)
+    @timeout(TIMEOUT_SEC)
     def call(self):
         ''' 数字をコールする '''
         call_num = self.player.call()
