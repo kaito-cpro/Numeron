@@ -134,7 +134,8 @@ class VirtualPlayer:
             else:
                 self.player.end_process(winner, None)
             self.switch()
-        self.cards_record = []
+        if tell_cards:
+            self.cards_record = []
 
     def tell_log(self, log):
         for i in range(2):
