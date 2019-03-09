@@ -120,7 +120,7 @@ class VirtualPlayer:
         else:
             return None
 
-    @timeout(TIMEOUT_SEC)
+    # @timeout(TIMEOUT_SEC)
     def call(self):
         ''' 数字をコールする '''
         call_num = self.player.call()
@@ -131,10 +131,10 @@ class VirtualPlayer:
         for i in range(2):
             if tell_cards:
                 self.player.end_process(winner, self.cards_record)
-                self.cards_record = []
             else:
                 self.player.end_process(winner, None)
             self.switch()
+        self.cards_record = []
 
     def tell_log(self, log):
         for i in range(2):
