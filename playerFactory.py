@@ -9,8 +9,11 @@ class PlayerFactory:
     player_dict = {
         1: Random,
         2: Human,
-        3: MyTestPlayer1}
-        
+        3: MyTestPlayer1,
+        4: Developer,
+        5: Kaito1,
+        6: Kaito2}
+
     def create_player(player_num):
         print(f'player{player_num}を選択してください')
         for num, player in PlayerFactory.player_dict.items():

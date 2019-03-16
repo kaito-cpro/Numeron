@@ -2,69 +2,58 @@ from common import *
 from player import Player
 
 class MyTestPlayer1(Player):
-    ''' Kaito の開発用 '''
+    ''' テストプレイヤー '''
 
     def __init__(self, player_num):
         self.player_num = player_num
-        self.guard_items = None
-        self.attack_items = None
-        self.card = None
+        self.card_list = [str(n).zfill(N) for n in range(10**N-1) if self.check_card(n)]
         self.log = []
-        self.epsilon = 0.2
-        self.time = 0
+        self.call_list = []
 
     def set_card(self):
-        return '345'
+        return '514'
 
     def select_guard(self):
         return None
-        if self.guard_items == []:
-            return None
-        else:
-            if random.random(0, 1) < self.epsilon:
-                guard_item = random.choice(self.guard_items)
-                self.guard_items.remove(guard_item)
-                return guard_item
 
     def select_attack(self):
         return None
-        if self.attack_items == []:
-            return None
-        else:
-            if random.random(0, 1) < self.epsilon:
-                attack_item = random.choice(self.attack_items)
-                self.attack_items.remove(attack_item)
-                return attack_item
 
     def shuffle(self):
         pass
 
     def call(self):
-        self.time += 1
-        print(self.time)
-        if self.time >= 2:
-            return '345'
+        if self.card_list == []:
+            while True:
+                call_num = str(random.randint(0, 10**N-1)).zfill(N)
+                if self.check_card(call_num) and call_num not in self.call_list:
+                    break
         else:
-            return '123'
-
-    def fill_eat_bite(self, num, num_log, eat, bite):
-        num = str(num).zfill(N)
-        num_log = str(num_log).zfill(N)
-
-        for i in range(len(num)):
-            if num[i] == num_log[i]:
-                eat -= 1
-            elif num[i] in num_log:
-                bite -= 1
-
-        return (eat == bite == 0)
+            call_num = random.choice(self.card_list)
+        call_num = str(call_num).zfill(N)
+        self.call_list.append(call_num)
+        print(call_num)
+        return call_num
 
     def end_process(self, winner, cards_record):
-        # print(f'log = {self.log}')    # 開発用
-        print(f'MyTestPlayer の数字は {self.card} でした')  # 開発用
-        self.log = []
-        return
+        pass
 
     def get_log(self, log):
-        print(log)
-        self.log.append(log)
+        if log[0] == self.player_num and log[1] == 'call':
+            for num in self.card_list[:]:
+                if not self.fill_eat_bite(num, log[2], log[3], log[4]):
+                    self.card_list.remove(num)
+
+    def calc_eat_bite(self, num1, num2):
+        num1 = str(num1).zfill(N)
+        num2 = str(num2).zfill(N)
+        eat, bite = 0, 0
+        for i in range(len(num1)):
+            if num1[i] == num2[i]:
+                eat += 1
+            elif num1[i] in num2:
+                bite += 1
+        return eat, bite
+
+    def fill_eat_bite(self, num1, num2, eat, bite):
+        return list(self.calc_eat_bite(num1, num2)) == [eat, bite]

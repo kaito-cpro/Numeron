@@ -85,11 +85,7 @@ class Game:
 
     def call(self):
         ''' 数字のコール '''
-        try:
-            call_num = self.player.call()
-        except:
-            print('time out')
-            return
+        call_num = self.player.call()
         call_num = str(call_num).zfill(N)
         self.write_log(self.player, call_num)
 
@@ -172,7 +168,8 @@ class Game:
     def show_log(self):
         print('log:')
         for log in self.log:
-            print(log)
+            if log[0] == self.winner:
+                print(log)
 
     def switch(self):
         ''' 手番の交代 '''

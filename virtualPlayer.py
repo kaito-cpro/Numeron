@@ -1,7 +1,6 @@
 from common import *
 from field import Field
 from playerFactory import PlayerFactory
-from timeout import timeout
 
 class VirtualPlayer:
     ''' Class Game と Class Player の仲介クラス '''
@@ -120,7 +119,6 @@ class VirtualPlayer:
         else:
             return None
 
-    # @timeout(TIMEOUT_SEC)
     def call(self):
         ''' 数字をコールする '''
         call_num = self.player.call()

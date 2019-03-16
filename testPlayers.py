@@ -119,3 +119,57 @@ class Human(Player):
 
     def get_log(self, log):
         print(f'\nログ受信: {log}')
+
+class Developer(Player):
+    ''' 開発用プレイヤー(アイテムは自動装備) '''
+
+    def __init__(self, player_num):
+        self.player_num = player_num
+        self.items = None
+        self.card = None
+
+    def set_card(self):
+        while True:
+            print('\n数字をセットしてください')
+            card = input('card: ')
+            if self.check_card(card):
+                break
+        self.card = card
+        return card
+
+    def select_guard(self):
+        print('\n防御アイテムを選択してください')
+        guard_item = input()
+        if guard_item == 'None':
+            guard_item = None
+        return guard_item
+
+    def select_attack(self):
+        print('\n攻撃アイテムを選択してください')
+        attack_item = input()
+        if attack_item == 'None':
+            attack_item = None
+        return attack_item
+
+    def call(self):
+        while True:
+            print('\nコールしてください')
+            call_num = input('your call: ')
+            if self.check_card(call_num):
+                break
+        return call_num
+
+    def shuffle(self):
+        while True:
+            print('\nシャッフルしてください')
+            new_card = input('new number: ')
+            if sorted(new_card) == sorted(self.card):
+                break
+        return new_card
+
+    def end_process(self, winner, cards_record):
+        print(f'winer: {winner}')
+        print(f'cards_record: {cards_record}')
+
+    def get_log(self, log):
+        print(f'\nログ受信: {log}')
